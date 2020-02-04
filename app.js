@@ -32,6 +32,8 @@ function addPhraseToDisplay (arrOfCharacters){
     li.textContent = char;
     if(char !== " "){
       li.className = 'letter';
+    } else {
+      li.className = 'space';
     }
     phraseUl.appendChild(li);
   }
