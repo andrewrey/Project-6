@@ -46,7 +46,7 @@ function checkLetter (buttonPressed) {
   let match = null;
   for(let i = 0; i < letters.length; i++){
     if(letters[i].textContent === buttonText) {
-      letters[i].className = "show";
+      letters[i].className = "show letter";
       match = letters[i].textContent;
     }
   }
