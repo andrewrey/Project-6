@@ -15,6 +15,29 @@ let phrases = ["coding is great", "you can do it", "treehouse is wonderful", "fr
 
 // Functions: 
 
+function backgroundColorWarningPerMiss(){
+  let body = document.querySelector('body');
+  let misses = {
+    1:()=>{
+      body.style.backgroundColor = '#FB7878'
+    },
+    2:()=>{
+      body.style.backgroundColor = '#DC6969'
+    },
+    3:()=>{
+      body.style.backgroundColor = '#BC5A5A'
+    },
+    4:()=>{
+      body.style.backgroundColor = '#9D4B4B'
+    },
+  }
+  if(missed < 5){
+    misses[missed]();
+  }
+}
+
+
+
 function getRandomPhraseAsArray (arr){
   let arrayLength = arr.length;
   function randomNum (topNum=arrayLength){
@@ -69,7 +92,15 @@ qwerty.addEventListener('click', (e)=>{
   button.className = "chosen";
   button.setAttribute('disabled','true');
   let letterFound = checkLetter(button);
-  console.log(letterFound);
+  if(letterFound === null){
+    let scoreBoardOl = document.querySelector('#scoreboard ol');
+    let lastChildLi = scoreBoardOl.lastElementChild;
+    let list = scoreBoardOl.querySelectorAll('li');
+    scoreBoardOl.removeChild(lastChildLi);
+    missed += 1;
+    backgroundColorWarningPerMiss();
+
+  }
  }
 });
 
