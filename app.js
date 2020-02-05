@@ -36,14 +36,31 @@ function backgroundColorWarningPerMiss(){
   }
 }
 
+function checkWin () {
+  let liLetters = document.querySelectorAll('#phrase li.letter');
+  let liShow = document.querySelectorAll('#phrase li.show');
+  if(liLetters.length === liShow.length){
+    let overlayH2 = overlay.querySelector('.title');
+    let overlayA = overlay.querySelector('a');
+    overlayH2.textContent = "You Win: Congratulations"
+    overlayA.textContent = "play again"
+    overlay.style.display = '';
 
+  }else if (missed === 5) {
+    let overlayH2 = overlay.querySelector('.title');
+    let overlayA = overlay.querySelector('a');
+    overlayH2.textContent = "Sorry You Lose!!!"
+    overlayA.textContent = "play again"
+    overlay.style.display = '';
+  }
+}
 
 function getRandomPhraseAsArray (arr){
   let arrayLength = arr.length;
   function randomNum (topNum=arrayLength){
     return Math.floor(Math.random() * topNum);
   };
-  let chosenSentence = phrases[randomNum()];
+  let chosenSentence = arr[randomNum()];
   let arrayOfCharacters = chosenSentence.split('');
   return arrayOfCharacters;  
 }
@@ -99,8 +116,8 @@ qwerty.addEventListener('click', (e)=>{
     scoreBoardOl.removeChild(lastChildLi);
     missed += 1;
     backgroundColorWarningPerMiss();
-
   }
+  checkWin();
  }
 });
 
