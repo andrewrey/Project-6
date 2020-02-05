@@ -23,7 +23,7 @@ function getRandomPhraseAsArray (arr){
   let chosenSentence = phrases[randomNum()];
   let arrayOfCharacters = chosenSentence.split('');
   return arrayOfCharacters;  
-};
+}
 
 function addPhraseToDisplay (arrOfCharacters){
   for(let i = 0; i < arrOfCharacters.length; i ++){
@@ -37,9 +37,22 @@ function addPhraseToDisplay (arrOfCharacters){
     }
     phraseUl.appendChild(li);
   }
+}
 
 
-};
+function checkLetter (buttonPressed) {
+  let letters = phraseUl.querySelectorAll('.letter');
+  let buttonText = buttonPressed.textContent
+  let match = null;
+  for(let i = 0; i < letters.length; i++){
+    if(letters[i].textContent === buttonText) {
+      letters[i].className = "show";
+      match = letters[i].textContent;
+    }
+  }
+  return match;
+
+}
 
 //  Event Handelers: 
 
@@ -50,7 +63,15 @@ overlay.addEventListener('click', (e)=>{
   addPhraseToDisplay(getRandomPhraseAsArray(phrases));
 });
 
-
+qwerty.addEventListener('click', (e)=>{
+ let button = e.target;
+ if(button.tagName === "BUTTON"){
+  button.className = "chosen";
+  button.setAttribute('disabled','true');
+  let letterFound = checkLetter(button);
+  console.log(letterFound);
+ }
+});
 
 // running the functions: 
 
