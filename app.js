@@ -17,6 +17,15 @@ let phrases = ["coding is great", "you can do it", "treehouse is wonderful", "fr
 
 // Functions: 
 
+
+function randomRGB(){
+  let red = Math.floor(Math.random() * 256)
+  let green = Math.floor(Math.random() * 256);
+  let blue = Math.floor(Math.random() * 256);
+  return `rgb(${red}, ${green}, ${blue})`;
+}
+
+
 function resetScoreBoard(){
   let scoreBoardOl = document.querySelector('#scoreboard ol');
   while(scoreBoardOl.firstElementChild){
@@ -107,6 +116,7 @@ function checkLetter (buttonPressed) {
   for(let i = 0; i < letters.length; i++){
     if(letters[i].textContent === buttonText) {
       letters[i].className = "show letter";
+      letters[i].style.backgroundColor = randomRGB();
       match = letters[i].textContent;
     }
   }
