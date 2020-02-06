@@ -117,6 +117,8 @@ function checkLetter (buttonPressed) {
     if(letters[i].textContent === buttonText) {
       letters[i].className = "show letter";
       letters[i].style.backgroundColor = randomRGB();
+      letters[i].style.height = '75px';
+      letters[i].style.width = '75px';
       match = letters[i].textContent;
     }
   }
