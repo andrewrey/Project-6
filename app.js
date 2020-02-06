@@ -69,6 +69,7 @@ function checkWin () {
   let liLetters = document.querySelectorAll('#phrase li.letter');
   let liShow = document.querySelectorAll('#phrase li.show');
   if(liLetters.length === liShow.length){
+    overlay.className = 'win';
     let overlayH2 = overlay.querySelector('.title');
     let overlayA = overlay.querySelector('a');
     overlayH2.textContent = "You Win: Congratulations"
@@ -76,6 +77,7 @@ function checkWin () {
     overlay.style.display = '';
 
   }else if (missed === 5) {
+    overlay.className = "lose";
     let overlayH2 = overlay.querySelector('.title');
     let overlayA = overlay.querySelector('a');
     overlayH2.textContent = "Sorry You Lose!!!"
@@ -138,6 +140,8 @@ overlay.addEventListener('click', (e)=>{
       while(phraseUl.firstElementChild){
         phraseUl.removeChild(phraseUl.firstElementChild);
       }
+      let body = document.querySelector('body');
+      body.style.backgroundColor = 'white';
       addPhraseToDisplay(getRandomPhraseAsArray(phrases));
       resetScoreBoard();
       missed = 0;
