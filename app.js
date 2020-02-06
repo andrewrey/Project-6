@@ -4,16 +4,36 @@
 let missed = 0;
 
 const qwerty = document.querySelector('#qwerty');
+const keyboard = qwerty.querySelectorAll('button');
 const phrase = document.querySelector('#phrase');
 const overlay = document.querySelector('#overlay');
 const gameStartButton = document.querySelector('.btn__reset');
 const phraseUl = phrase.querySelector('ul');
 
 
+
 // Array of phrases for players to guess from
 let phrases = ["coding is great", "you can do it", "treehouse is wonderful", "front end rocks", "build a solid base"];
 
 // Functions: 
+
+function resetScoreBoard(){
+  let scoreBoardOl = document.querySelector('#scoreboard ol');
+  while(scoreBoardOl.firstElementChild){
+    scoreBoardOl.removeChild(scoreBoardOl.firstElementChild);
+  }
+  for(let i = 0; i < 5; i ++){
+    let li = document.createElement('li');
+    let img = document.createElement('img');
+    li.className = 'tries';
+    img.setAttribute('src', 'images/liveHeart.png');
+    img.setAttribute('height', '35px');
+    img.setAttribute('width', '35px');
+    li.appendChild(img);
+    scoreBoardOl.appendChild(li);
+  }
+}
+
 
 function backgroundColorWarningPerMiss(){
   let body = document.querySelector('body');
@@ -98,9 +118,22 @@ function checkLetter (buttonPressed) {
 
 overlay.addEventListener('click', (e)=>{
   let startLink = e.target;
-  if(startLink.className === 'btn__reset')
-  overlay.style.display = 'none'
+  if(startLink.textContent === 'Start Game'){
+  overlay.style.display = 'none';
   addPhraseToDisplay(getRandomPhraseAsArray(phrases));
+  } else if (startLink.textContent === 'play again'){
+      overlay.style.display = 'none';
+      while(phraseUl.firstElementChild){
+        phraseUl.removeChild(phraseUl.firstElementChild);
+      }
+      addPhraseToDisplay(getRandomPhraseAsArray(phrases));
+      resetScoreBoard();
+      missed = 0;
+      for(let i = 0; i < keyboard.length; i++){
+        keyboard[i].className = '';
+        keyboard[i].removeAttribute('disabled');
+      }
+    }
 });
 
 qwerty.addEventListener('click', (e)=>{
