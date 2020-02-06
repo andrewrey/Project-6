@@ -164,5 +164,4 @@ qwerty.addEventListener('click', (e)=>{
  }
 });
 
-// running the functions: 
 
